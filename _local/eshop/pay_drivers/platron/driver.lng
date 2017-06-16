@@ -32,3 +32,14 @@ Pay using Platron
 Payment system name (choose PS on merchant side)
 %%payment_system_name%ru%%
 Идентификатор ПС (в случае выбора на стороне ПС)
+
+%%create_ofd_check%en%%
+Create check in OFD
+%%create_ofd_check%ru%%
+Создать чек в ОФД
+
+%%ofd_vat_type%en%%
+VAT type for OFD
+%%ofd_vat_type%ru%%
+Ставка НДС
+

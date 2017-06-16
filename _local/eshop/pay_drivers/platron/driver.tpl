@@ -21,6 +21,32 @@
         <td>%%payment_system_name%%:</td>
         <td><input type="text" name="payment_system_name" class="field" value="##payment_system_name##" size="20"></td>
     </tr>
+    </tr>
+	<tr>
+        <td>%%create_ofd_check%%:</td>
+        <td><input type="checkbox" name="create_ofd_check" class="field" value="1" ##if(create_ofd_check==1)##checked##endif##></td>
+    </tr>
+    </tr>
+	<tr>
+        <td>%%ofd_vat_type%%:</td>
+        <td>
+            <select name="ofd_vat_type">
+                             '0' => '0%',
+                             '10' => '10%',
+                             '18' => '18%',
+                             '110' => '10/110',
+                             '118' => '18/118'
+                <option value="0">0%</option>
+                <option value="10">10%</option>
+                <option value="18">18%</option>
+                <option value="110">10/110%</option>
+                <option value="180">18/118%</option>
+            </select>
+            <script>
+                AMI.$('[name=ofd_vat_type]').val('##ofd_vat_type##');
+            </script>
+        </td>
+    </tr>
 "-->
 
 <!--#set var="checkout_form" value="
