@@ -79,6 +79,10 @@ class Platron_PaymentSystemDriver extends AMI_PaymentSystemDriver{
 		$oEshopCart = AMI::getResource('eshop/cart');
 		$arrItems = $oEshopCart->getItems();
 
+        $oOrder =
+            AMI::getResourceModel('eshop_order/table')
+            ->find($aData['order_id']);
+
 		$strDescription = '';
 		foreach($arrItems as $objItem){
 			$strDescription .= $objItem->getItem()->header;
@@ -155,6 +159,16 @@ class Platron_PaymentSystemDriver extends AMI_PaymentSystemDriver{
 		            $ofdReceiptItem->vat = $aData['ofd_vat_type'];
         		    $ofdReceiptItems[] = $ofdReceiptItem;
 		        }
+
+				if (floatval($oOrder->shipping > 0)) {
+        		    $ofdReceiptItem = new OfdReceiptItem();
+		            $ofdReceiptItem->label = 'Shipping';
+        		    $ofdReceiptItem->amount = round($oOrder->shipping, 2);
+		            $ofdReceiptItem->price = round($oOrder->shipping, 2);
+        		    $ofdReceiptItem->quantity = 1;
+		            $ofdReceiptItem->vat = '18'; // fixed
+        		    $ofdReceiptItems[] = $ofdReceiptItem;
+				}
 
 				$ofdReceiptRequest = new OfdReceiptRequest($aData['merchant_id'], $paymentId);
 				$ofdReceiptRequest->items = $ofdReceiptItems;
