@@ -31,16 +31,11 @@
         <td>%%ofd_vat_type%%:</td>
         <td>
             <select name="ofd_vat_type">
-                             '0' => '0%',
-                             '10' => '10%',
-                             '18' => '18%',
-                             '110' => '10/110',
-                             '118' => '18/118'
                 <option value="0">0%</option>
                 <option value="10">10%</option>
                 <option value="18">18%</option>
                 <option value="110">10/110%</option>
-                <option value="180">18/118%</option>
+                <option value="118">18/118%</option>
             </select>
             <script>
                 AMI.$('[name=ofd_vat_type]').val('##ofd_vat_type##');
