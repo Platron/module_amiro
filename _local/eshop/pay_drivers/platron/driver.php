@@ -160,9 +160,11 @@ class Platron_PaymentSystemDriver extends AMI_PaymentSystemDriver{
         		    $ofdReceiptItems[] = $ofdReceiptItem;
 		        }
 
-				if (floatval($oOrder->shipping > 0)) {
+				if (floatval($oOrder->shipping) > 0) {
+					$shipName = $oOrder->custom_info['get_type_name'];
+
         		    $ofdReceiptItem = new OfdReceiptItem();
-		            $ofdReceiptItem->label = 'Shipping';
+		            $ofdReceiptItem->label = $shipName ? $shipName : 'Shipping';
         		    $ofdReceiptItem->amount = round($oOrder->shipping, 2);
 		            $ofdReceiptItem->price = round($oOrder->shipping, 2);
         		    $ofdReceiptItem->quantity = 1;
@@ -192,7 +194,9 @@ class Platron_PaymentSystemDriver extends AMI_PaymentSystemDriver{
 	        return false;
 		}
 
+
 		$arrFields['pg_sig'] = PG_Signature::make('payment.php', $arrFields, $aData['secret_key']);
+		$arrFields['pg_redirect_url'] = $responseElement->pg_redirect_url;
 
 
 		// Check parameters and set your fields here

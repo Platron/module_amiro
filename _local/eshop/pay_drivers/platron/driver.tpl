@@ -52,7 +52,7 @@
 "-->
 
 <!--#set var="pay_form" value="
-    <form name="paymentform" action="https://platron.ru/payment.php" method="POST">
+    <form name="paymentform" action="##pg_redirect_url##" method="POST">
 		<input type="hidden" name="pg_merchant_id" value="##pg_merchant_id##" />
 		<input type="hidden" name="pg_order_id" value="##pg_order_id##" />
 		<input type="hidden" name="pg_currency" value="##pg_currency##" />
