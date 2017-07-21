@@ -153,7 +153,6 @@ class Platron_PaymentSystemDriver extends AMI_PaymentSystemDriver{
 
         		    $ofdReceiptItem = new OfdReceiptItem();
 		            $ofdReceiptItem->label = $aProduct['name'];
-        		    $ofdReceiptItem->amount = round($aProduct['price'] * $oProduct->qty, 2);
 		            $ofdReceiptItem->price = round($aProduct['price'], 2);
         		    $ofdReceiptItem->quantity = $oProduct->qty;
 		            $ofdReceiptItem->vat = $aData['ofd_vat_type'];
@@ -165,7 +164,6 @@ class Platron_PaymentSystemDriver extends AMI_PaymentSystemDriver{
 
         		    $ofdReceiptItem = new OfdReceiptItem();
 		            $ofdReceiptItem->label = $shipName ? $shipName : 'Shipping';
-        		    $ofdReceiptItem->amount = round($oOrder->shipping, 2);
 		            $ofdReceiptItem->price = round($oOrder->shipping, 2);
         		    $ofdReceiptItem->quantity = 1;
 		            $ofdReceiptItem->vat = '18'; // fixed
@@ -180,7 +178,7 @@ class Platron_PaymentSystemDriver extends AMI_PaymentSystemDriver{
 				$responseElementOfd = new SimpleXMLElement($responseOfd);
 
 				if ((string)$responseElementOfd->pg_status != 'ok') {
-					echo "<h1>Platron init payment error. ".$responseElementOfd->pg_error_description."</h1>";
+					echo "<h1>Platron check create error. ".$responseElementOfd->pg_error_description."</h1>";
 					$aRes['error'] = 'Platron response OFD error';
 		            $aRes['errno'] = 1;
 			        return false;
@@ -430,13 +428,10 @@ class PG_Signature {
 
 	private static function makeSigStr ( $strScriptName, $arrParams, $strSecretKey ) {
 		unset($arrParams['pg_sig']);
-		
+
 		ksort($arrParams);
 
-		array_unshift($arrParams, $strScriptName);
-		array_push   ($arrParams, $strSecretKey);
-
-		return self::arJoin($arrParams);
+		return $strScriptName .';' . self::arJoin($arrParams) . ';' . $strSecretKey;
 	}
 
 	private static function arJoin ($in) {
@@ -641,7 +636,6 @@ class OfdReceiptItem
 	{
 		return array(
 			'pg_label' => extension_loaded('mbstring') ? mb_substr($this->label, 0, 128) : substr($this->label, 0, 128),
-			'pg_amount' => $this->amount,
 			'pg_price' => $this->price,
 			'pg_quantity' => $this->quantity,
 			'pg_vat' => $this->vat,
