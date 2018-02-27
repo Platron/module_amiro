@@ -166,7 +166,7 @@ class Platron_PaymentSystemDriver extends AMI_PaymentSystemDriver{
 		            $ofdReceiptItem->label = $shipName ? $shipName : 'Shipping';
 		            $ofdReceiptItem->price = round($oOrder->shipping, 2);
         		    $ofdReceiptItem->quantity = 1;
-		            $ofdReceiptItem->vat = '18'; // fixed
+		            $ofdReceiptItem->vat = $aData['ofd_vat_type'] == 'none' ? 'none' : 18;
         		    $ofdReceiptItems[] = $ofdReceiptItem;
 				}
 
