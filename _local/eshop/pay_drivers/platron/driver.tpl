@@ -36,6 +36,7 @@
                 <option value="18">18%</option>
                 <option value="110">10/110%</option>
                 <option value="118">18/118%</option>
+		<option value="none">Не облагается</option>
             </select>
             <script>
                 AMI.$('[name=ofd_vat_type]').val('##ofd_vat_type##');
