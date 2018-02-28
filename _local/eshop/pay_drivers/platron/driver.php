@@ -100,7 +100,6 @@ class Platron_PaymentSystemDriver extends AMI_PaymentSystemDriver{
 			'pg_lifetime'			=> !empty($aData['lifetime'])?$aData['lifetime']:0,
 			'pg_testing_mode'		=> !empty($aData['testing_mode'])?1:0,
 			'pg_description'		=> $strDescription,
-			'pg_user_ip'			=> $_SERVER['REMOTE_ADDR'],
 			'pg_language'			=> strtoupper($aData['language']),
 			'pg_check_url'			=> $aData['callback'],
 			'pg_result_url'			=> $aData['callback'],
