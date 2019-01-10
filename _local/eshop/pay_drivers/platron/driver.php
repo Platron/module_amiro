@@ -165,7 +165,8 @@ class Platron_PaymentSystemDriver extends AMI_PaymentSystemDriver{
 		            $ofdReceiptItem->label = $shipName ? $shipName : 'Shipping';
 		            $ofdReceiptItem->price = round($oOrder->shipping, 2);
         		    $ofdReceiptItem->quantity = 1;
-		            $ofdReceiptItem->vat = $aData['ofd_vat_type'] == 'none' ? 'none' : 18;
+		            $ofdReceiptItem->vat = $aData['ofd_vat_type'] == 'none' ? 'none' : 20;
+			    $ofdReceiptItem->type = 'service';
         		    $ofdReceiptItems[] = $ofdReceiptItem;
 				}
 
@@ -630,6 +631,7 @@ class OfdReceiptItem
 	public $price;
 	public $quantity;
 	public $vat;
+	public $type = 'product';
 
 	public function toArray()
 	{
@@ -638,6 +640,7 @@ class OfdReceiptItem
 			'pg_price' => $this->price,
 			'pg_quantity' => $this->quantity,
 			'pg_vat' => $this->vat,
+			'pg_type' => $this->type,
 		);
 	}
 }
