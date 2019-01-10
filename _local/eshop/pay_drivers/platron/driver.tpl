@@ -33,9 +33,9 @@
             <select name="ofd_vat_type">
                 <option value="0">0%</option>
                 <option value="10">10%</option>
-                <option value="18">18%</option>
+                <option value="20">20%</option>
                 <option value="110">10/110%</option>
-                <option value="118">18/118%</option>
+                <option value="120">20/120%</option>
 		<option value="none">Не облагается</option>
             </select>
             <script>
